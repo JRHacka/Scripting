@@ -10,7 +10,7 @@ check_filename() {
 		# Check if the file exists an if so push it to github
 		if [ -f $filename ]; then
 			echo "Git adding $filename"
-			git add $addthis
+			git add $filename
 			sleep .5s
 			echo "Done. Now adding the commit comment"
 			git commit -m "$commitcomment"
