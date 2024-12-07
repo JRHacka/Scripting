@@ -22,6 +22,9 @@ check_filename() {
 		# If the file doesn't exist try again
 		else
 			echo "The file $filename does not exist. Please try again."
+			echo "Here are your options:"
+			ls -t
+			sleep 5s
 		fi
 	done
 }
