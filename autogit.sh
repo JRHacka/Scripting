@@ -1,6 +1,28 @@
 #!/bin/bash
 ## This script is meant to automate the GIT process. 
 
+# automate the git pull
+sync_files() {
+	while true; do
+		# Get user input for if they would like to sync first
+		read -p "Do you want to sync your files before starting?" yesorno
+
+		# Check if the answer is yes
+		if [ "$yesorno" == "yes" ]; then
+			echo "Syncing the repository."
+			git pull
+			break
+		elif [ "$yesorno" == "no" ]; then
+			echo "Thank you."
+			break
+		else
+			echo "Invalid response please choose yes or no as an answer."
+		fi
+	done
+}
+
+
+# automate the git push process
 check_filename() {
 	while true; do
 		# Get user input for filename and commit comment
@@ -29,6 +51,15 @@ check_filename() {
 	done
 }
 
-# Call the function
-check_filename
+# Call the correct function
+echo "Do you want to sync the repository or are you ready to push changes?"
+read -p "Choose Pull or Push: " pullorpush
+
+if [ "$pullorpush" = "Push" ]; then
+	check_filename
+elif [ "$pullorpush" = "Pull" ]; then
+	sync_files
+else
+	echo "Invalid choice."
+fi
 
