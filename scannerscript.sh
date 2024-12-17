@@ -12,9 +12,12 @@ check_directory() {
 
 		if [ -d $filelocal$dirname ]; then
 			echo "Running an nmap scan against $ipaddy"
-			nmap -sT -sV -Pn -p- -A -T3 $ipaddy -oN "$filelocal""$dirname"/"$ipaddy""$cur_date"
+			nmap -sT -sV -Pn -p- -A -T3 $ipaddy -oN "$filelocal""$dirname"/"nmap_""$ipaddy""$cur_date"
 			echo "NMAP scan complete, and results are stored here:"
-			echo "$filelocal""$dirname"/"$ipaddy""$cur_date"
+			echo "$filelocal""$dirname"/"nmap_""$ipaddy""$cur_date"
+			wfuzz -c -z file,/usr/share/wfuzz/wordlist/general/common.txt --hc 404 http://"$ipaddy"/FUZZ > "$filelocal""$dirname"/"wfuzz_""$ipaddy""$cur_date"
+			echo "WFUZZ scan complete, and results are stored here:"
+			echo "$filelocal""$dirname"/"wfuzz""$ipaddy""$cur_date"
 			break
 		else
 			echo "The directory did not exist, but has been created."
