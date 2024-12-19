@@ -7,3 +7,6 @@ git add (DOCs)
 git commit -m "comment here"
 git branch -M main
 git push -u origin main
+
+
+Testing syncing from other laptop
