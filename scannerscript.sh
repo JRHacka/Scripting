@@ -32,8 +32,7 @@ check_directory() {
 			break
 		else
 			echo "The directory did not exist, but has been created."
-			mkdir $filelocal
-			mkdir $filelocal$dirname
+			mkdir -p $filelocal$dirname
 		fi
 	done
 }
