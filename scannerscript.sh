@@ -14,7 +14,7 @@ check_directory() {
 
 		if [ -d $filelocal$dirname ]; then
 			echo "Running an nmap scan against $ipaddy"
-			nmap -sT -sV -Pn -p- -A -T3 $ipaddy -oN "$filelocal""$dirname"/"nmap_""$ipaddy""$cur_date" &
+			nmap -sT -sV -Pn -p- -A -T3 $ipaddy -oN "$filelocal""$dirname"/"nmap_""$ipaddy""_""$cur_date" &
 			pid=$!
 			while kill -0 $pid 2>/dev/null; do
 			    chars="/—\|"
@@ -25,13 +25,14 @@ check_directory() {
 			    done
 			done
 			echo "NMAP scan complete, and results are stored here:"
-			echo "$filelocal""$dirname"/"nmap_""$ipaddy""$cur_date"
+			echo "$filelocal""$dirname"/"nmap_""$ipaddy""_""$cur_date"
 			wfuzz -c -z file,/usr/share/wfuzz/wordlist/general/common.txt --hc 404 http://"$ipaddy"/FUZZ > "$filelocal""$dirname"/"wfuzz_""$ipaddy""_""$cur_date"
 			echo "WFUZZ scan complete, and results are stored here:"
 			echo "$filelocal""$dirname"/"wfuzz_""$ipaddy""_""$cur_date"
 			break
 		else
 			echo "The directory did not exist, but has been created."
+			mkdir $filelocal
 			mkdir $filelocal$dirname
 		fi
 	done
@@ -39,3 +40,5 @@ check_directory() {
 
 #Call our function
 check_directory
+
+#Need to figure out how to create target scans directory ifit doesn't exist. Will create the dirname variable but not file_local
