@@ -17,11 +17,11 @@ check_directory() {
 			nmap -sT -sV -Pn -p- -A -T3 $ipaddy -oN "$filelocal""$dirname"/"nmap_""$ipaddy""$cur_date" &
 			pid=$!
 			while kill -0 $pid 2>/dev/null; do
-			    chars="/-\|/-\|/-\|/-\|"
+			    chars="/—\|"
 			    i=0
 			    while kill -0 $pid 2>/dev/null; do
 			        printf "\r${chars:i++%4:1}"
-			        sleep 0.3
+			        sleep 0.15
 			    done
 			done
 			echo "NMAP scan complete, and results are stored here:"
