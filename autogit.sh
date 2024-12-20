@@ -52,6 +52,7 @@ check_filename() {
 }
 
 # Call the correct function
+figlet "Automatic GIT Script" | lolcat -a -s 100 | boxes -d bear
 echo "Do you want to sync the repository or are you ready to push changes?"
 read -p "Choose Pull or Push: " pullorpush
 
