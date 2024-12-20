@@ -10,3 +10,5 @@ git push -u origin main
 
 
 Testing syncing from other laptop
+
+Testing after using credintial.helper store to store github creds
